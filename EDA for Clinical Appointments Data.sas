@@ -119,9 +119,15 @@ else if apt_day = 6 then week_day = 'Fri';
 else week_day = 'Sat';
 run;
 
-/*Bar char*/
-
 title "Weekdays On Which Most of the Appointments Were Missed ";
 proc sgplot data = weekdays;
     vbar week_day/ group=show groupdisplay=cluster stat=freq  ;
+run;
+
+/*Logistic Regression (Predicting No-Shows)*/
+
+proc logistic data=weekdays;
+    class gender sms_received week_day / param=ref;
+    model show(event='1') = age sms_received day_diff week_day / selection=stepwise;
+    output out=predictions p=prob_show;
 run;
