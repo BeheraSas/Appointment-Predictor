@@ -51,7 +51,7 @@ tables show*gender/ plots=freqplot(twoway=stacked orient=Horizontal);
 run;
 ods graphics off;
 
-/*Analysis for patients who don't receive SMS to miss their appointment?*/
+/*Analysis for patients who don't receive SMS to miss their appointment*/
 ods graphics on;
 proc freq data=apt_data2;
 tables show*sms_received/ plots=freqplot(twoway=stacked orient=Horizontal);
